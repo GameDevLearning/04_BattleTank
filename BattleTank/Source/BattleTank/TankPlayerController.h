@@ -21,6 +21,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float CrossHairYLoation = 0.33333;
 
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 10.f;
+
 	ATank* GetControlledTank() const;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
@@ -30,4 +33,6 @@ private:
 
 	//true if hit landscape
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
+
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 };
