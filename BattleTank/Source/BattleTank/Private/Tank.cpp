@@ -3,6 +3,11 @@
 #include "BattleTank.h"
 #include "Tank.h"
 
+// Called to bind functionality to input
+void ATank::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+{
+	TankAimingComponent->SetBarrelReference(BarrelToSet);
+}
 
 // Sets default values
 ATank::ATank()
