@@ -2,9 +2,10 @@
 
 #include "BattleTank.h"
 #include "Tank.h"
+#include "TankBarrel.h"
 
 // Called to bind functionality to input
-void ATank::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
 }
