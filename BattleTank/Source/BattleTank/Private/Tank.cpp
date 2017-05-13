@@ -10,6 +10,12 @@ void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
 }
 
+// Called to bind functionality to input
+void ATank::SetTurretReference(UTankTurret * TurretToSet)
+{
+	TankAimingComponent->SetTurretReference(TurretToSet);
+}
+
 // Sets default values
 ATank::ATank()
 {
