@@ -18,7 +18,9 @@ void ATank::Fire()
 {
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 
-	if (Barrel && isReloaded)
+	if (!ensure(Barrel)) { return; }
+
+	if (isReloaded)
 	{
 		// spawn a projectile at the socket lockation
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
@@ -45,6 +47,6 @@ ATank::ATank()
 
 void ATank::AimAt(FVector HitLocation)
 {
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
