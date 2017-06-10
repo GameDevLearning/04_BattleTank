@@ -10,7 +10,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // needed for blueprint begin play
 
-	UE_LOG(LogTemp, Warning, TEXT("Donkey: Tank BeginPlay called."));
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 void ATank::Fire()
@@ -41,7 +41,6 @@ ATank::ATank()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	UE_LOG(LogTemp, Warning, TEXT("Donkey: Tank constructor called."));
 }
 
 void ATank::AimAt(FVector HitLocation)

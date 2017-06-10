@@ -8,7 +8,7 @@
 // Enum for aiming state
 UENUM()
 enum class EFiringState : uint8
-{
+{ 
 	Reloading,
 	Aiming,
 	Locked
