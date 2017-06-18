@@ -25,7 +25,14 @@ void UTankAimingComponent::BeginPlay()
 
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	if((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
+
+	UE_LOG(LogTemp, Warning, TEXT("AmmoLeft: %i"), AmmoRemaining);
+
+	if(AmmoRemaining <= 0)
+	{
+		FiringState = EFiringState::Empty;
+	}
+	else if((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
 	{
 		FiringState = EFiringState::Reloading;
 	}
@@ -101,7 +108,7 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 
 void UTankAimingComponent::Fire()
 {
-	if (FiringState != EFiringState::Reloading)
+	if (FiringState == EFiringState::Locked || FiringState == EFiringState::Aiming)
 	{
 		// spawn a projectile at the socket lockation
 		if (!ensure(Barrel)) { return; }
@@ -110,16 +117,20 @@ void UTankAimingComponent::Fire()
 			ProjectileBlueprint,
 			Barrel->GetSocketLocation(FName("Projectile")),
 			Barrel->GetSocketRotation(FName("Projectile"))
-			);
+		);
 
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
+		AmmoRemaining--;
 	}
-
-
 }
 
 EFiringState UTankAimingComponent::GetFiringState()
 {
 	return FiringState;
+}
+
+int32 UTankAimingComponent::GetRoundsLeft() const
+{
+	return AmmoRemaining;
 }
