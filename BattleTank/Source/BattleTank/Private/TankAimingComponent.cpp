@@ -118,3 +118,8 @@ void UTankAimingComponent::Fire()
 
 
 }
+
+EFiringState UTankAimingComponent::GetFiringState()
+{
+	return FiringState;
+}
