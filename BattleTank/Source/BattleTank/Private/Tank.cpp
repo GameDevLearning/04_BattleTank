@@ -3,6 +3,12 @@
 #include "BattleTank.h"
 #include "Tank.h"
 
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	CurrentHealth = StartingHealth;
+}
+
 float ATank::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCause)
 {
 	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
